@@ -21,7 +21,7 @@ struct CellView: View {
                     .padding(.top)
                 Text(aciklama.lowercased())
                     .padding(.horizontal)
-                    .padding(.top)
+                    .padding(.top, 0.1)
 
 
                 VStack(alignment: .leading) {
@@ -33,7 +33,9 @@ struct CellView: View {
                         Text(tarih)
                     }
 
-                }.padding()
+                }.padding(.top, 0.1)
+                    .padding(.leading)
+                    .padding(.bottom)
             }
             .frame(width: UIScreen.main.bounds.width * 0.9)
             .foregroundColor(Color.black.opacity(0.8))

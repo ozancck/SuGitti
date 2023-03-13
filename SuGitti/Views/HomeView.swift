@@ -42,7 +42,7 @@ struct HomeView: View {
                         .padding(.top, 55)
                     ScrollView {
                         ForEach(service.shortaces, id: \.self) { element in
-                            CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KesintiTarihi)
+                            CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
                         }
                     }
                 }
