@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Shortaces: Decodable, Hashable {
-    let kesintiTarihi, aciklama, ilceAdi: String
-    let mahalleID: [Int]
-    let mahalleler, tip, arizaGiderilmeTarihi: String
-    let ilceID: Int
-    let birim: String
-    let arizaID: Int
-    let arizaDurumu, guncellemeTarihi: String
-    let arizaTipID: Int
-    let kayitTarihi, kesintiSuresi, ongoru: String
+struct Shortaces: Codable, Hashable {
+    let KesintiTarihi, Aciklama, IlceAdi: String
+    let MahalleID: [Int]
+    let Mahalleler, Tip, ArizaGiderilmeTarihi: String
+    let IlceID: Int
+    let Birim: String
+    let ArizaID: Int
+    let ArizaDurumu, GuncellemeTarihi: String
+    let ArizaTipID: Int
+    let KayitTarihi, KesintiSuresi, Ongoru: String
 }
