@@ -12,42 +12,55 @@ struct HomeView: View {
 
     var body: some View {
         NavigationStack {
-            
-            ZStack {
-                LinearGradient(colors: [Color.cyan.opacity(0.7), Color.purple.opacity(0.3)], startPoint: .topLeading, endPoint: .bottomTrailing)
+            HStack {
+                Text("Izmir")
+                    .font(.largeTitle)
+                    .bold()
+            }
+            VStack {
+                List {
+                    ForEach(service.shortaces, id: \.self) { element in
+                        // CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
+                        NavigationLink {
+                        } label: {
+                            HStack {
+                                Image(systemName: "drop.degreesign.slash.fill")
+                                    .foregroundColor(element.ArizaDurumu == "1" ? .blue : .red)
+                                    .padding(.trailing)
+                                    .font(.title2)
+                                VStack(alignment: .leading) {
+                                    Text(element.IlceAdi)
+                                        .bold()
+                                  
 
-                Circle()
-                    .frame(width: 300)
-                    .foregroundColor(Color.blue.opacity(0.3))
-                    .blur(radius: 10)
-                    .offset(x: -100, y: -150)
+                                    Text(element.Mahalleler)
+                                        .font(.caption)
+                                }
+                            }
+                        }
+                    }
+                }
+                HStack {
+                    HStack {
+                        HStack {
+                            Image(systemName: "drop.degreesign.slash.fill")
+                                .foregroundColor(.blue)
 
-                RoundedRectangle(cornerRadius: 30, style: .continuous)
-                    .frame(width: 500, height: 500)
-                    .foregroundStyle(LinearGradient(colors: [Color.purple.opacity(0.6), Color.mint.opacity(0.5)], startPoint: .top, endPoint: .leading))
-                    .offset(x: 300)
-                    .blur(radius: 30)
-                    .rotationEffect(.degrees(30))
+                            Text("Giderildi ")
+                                .bold()
 
-                Circle()
-                    .frame(width: 450)
-                    .foregroundStyle(Color.pink.opacity(0.6))
-                    .blur(radius: 20)
-                    .offset(x: 200, y: -200)
+                        }.padding(.bottom, 1)
 
-                VStack {
-                    Text("Su Gitti")
-                        .font(.largeTitle)
-                        .bold()
-                        .padding(.top, 55)
-                    ScrollView {
-                        ForEach(service.shortaces, id: \.self) { element in
-                            CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
+                        HStack {
+                            Image(systemName: "drop.degreesign.slash.fill")
+                                .foregroundColor(.red)
+
+                            Text("Devam Ediyor")
+                                .bold()
                         }
                     }
                 }
             }
-            .edgesIgnoringSafeArea(.all)
         }
     }
 }
