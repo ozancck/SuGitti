@@ -9,56 +9,76 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject var service = Service()
+    @State private var searchText = ""
 
     var body: some View {
-        NavigationStack {
-            HStack {
-                Text("Izmir")
-                    .font(.largeTitle)
-                    .bold()
-            }
-            VStack {
-                List {
-                    ForEach(service.shortaces, id: \.self) { element in
-                        // CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
-                        NavigationLink {
-                        } label: {
-                            HStack {
-                                Image(systemName: "drop.degreesign.slash.fill")
-                                    .foregroundColor(element.ArizaDurumu == "1" ? .blue : .red)
-                                    .padding(.trailing)
-                                    .font(.title2)
-                                VStack(alignment: .leading) {
-                                    Text(element.IlceAdi)
-                                        .bold()
-                                  
+        VStack {
+            NavigationStack {
+                VStack {
+                    List(service.shortaces, id: \.self) { element in
+                        if searchText == "" {
+                            // CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
+                            NavigationLink {
+                            } label: {
+                                HStack {
+                                    Image(systemName: "drop.degreesign.slash.fill")
+                                        .foregroundColor(.red)
+                                        .padding(.trailing)
+                                        .font(.title2)
+                                    VStack(alignment: .leading) {
+                                        Text(element.IlceAdi)
+                                            .bold()
 
-                                    Text(element.Mahalleler)
-                                        .font(.caption)
+                                        Text(element.Mahalleler)
+                                            .font(.caption)
+                                    }
                                 }
+                            }
+                        } else {
+                            if element.IlceAdi.lowercased().contains(searchText.lowercased()) || element.Mahalleler.lowercased().contains(searchText.lowercased()) {
+                                NavigationLink {
+                                } label: {
+                                    HStack {
+                                        Image(systemName: "drop.degreesign.slash.fill")
+                                            .foregroundColor(.red)
+                                            .padding(.trailing)
+                                            .font(.title2)
+                                        VStack(alignment: .leading) {
+                                            Text(element.IlceAdi)
+                                                .bold()
+
+                                            Text(element.Mahalleler)
+                                                .font(.caption)
+                                        }
+                                    }
+                                }
+                            } else {
                             }
                         }
                     }
-                }
-                HStack {
-                    HStack {
-                        HStack {
-                            Image(systemName: "drop.degreesign.slash.fill")
-                                .foregroundColor(.blue)
-
-                            Text("Giderildi ")
-                                .bold()
-
-                        }.padding(.bottom, 1)
-
-                        HStack {
-                            Image(systemName: "drop.degreesign.slash.fill")
-                                .foregroundColor(.red)
-
-                            Text("Devam Ediyor")
-                                .bold()
-                        }
+                    .searchable(text: $searchText, prompt: "Look for something")
+                    .refreshable {
+                        service.fetchShortaces()
                     }
+                    .navigationTitle("Aktif Kesintiler")
+
+                    VStack(alignment: .center) {
+                        NavigationLink {
+                        } label: {
+                            HStack {
+                                Image(systemName: "location")
+                                Text("Konum: Izmir")
+                                    .bold()
+                                    .font(.caption)
+                            }
+                        }
+                        .foregroundColor(.black)
+                    }
+                    .padding()
+                    .frame(
+                        minWidth: 0,
+                        maxWidth: .infinity
+                    )
                 }
             }
         }
