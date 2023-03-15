@@ -18,3 +18,5 @@ struct Shortaces: Codable, Hashable {
     let ArizaTipID: Int
     let KayitTarihi, KesintiSuresi, Ongoru: String
 }
+
+

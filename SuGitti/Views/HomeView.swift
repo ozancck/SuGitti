@@ -19,38 +19,16 @@ struct HomeView: View {
                         if searchText == "" {
                             // CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
                             NavigationLink {
+                                DetailsView(mahalleler: element.Mahalleler, title: element.IlceAdi, description: element.Aciklama, dateString: element.KesintiTarihi, giderimleZamani: element.ArizaGiderilmeTarihi)
                             } label: {
-                                HStack {
-                                    Image(systemName: "drop.degreesign.slash.fill")
-                                        .foregroundColor(.red)
-                                        .padding(.trailing)
-                                        .font(.title2)
-                                    VStack(alignment: .leading) {
-                                        Text(element.IlceAdi)
-                                            .bold()
-
-                                        Text(element.Mahalleler)
-                                            .font(.caption)
-                                    }
-                                }
+                                CellView(ilce: element.IlceAdi, mahalleler: element.Mahalleler)
                             }
                         } else {
                             if element.IlceAdi.lowercased().contains(searchText.lowercased()) || element.Mahalleler.lowercased().contains(searchText.lowercased()) {
                                 NavigationLink {
+                                    DetailsView(mahalleler: element.Mahalleler, title: element.IlceAdi, description: element.Aciklama, dateString: element.KesintiTarihi, giderimleZamani: element.ArizaGiderilmeTarihi)
                                 } label: {
-                                    HStack {
-                                        Image(systemName: "drop.degreesign.slash.fill")
-                                            .foregroundColor(.red)
-                                            .padding(.trailing)
-                                            .font(.title2)
-                                        VStack(alignment: .leading) {
-                                            Text(element.IlceAdi)
-                                                .bold()
-
-                                            Text(element.Mahalleler)
-                                                .font(.caption)
-                                        }
-                                    }
+                                    CellView(ilce: element.IlceAdi, mahalleler: element.Mahalleler)
                                 }
                             } else {
                             }
