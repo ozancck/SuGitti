@@ -13,13 +13,11 @@ struct CountdownView: View {
     @State private var remainingSeconds = 0
     var body: some View {
         VStack {
-            Text("Arıza Süresi: \(timeLeft())")
-                .font(.system(size: 20, weight: .bold, design: .default))
-                .foregroundColor(.white)
+            Text(" \(timeLeft())")
+                .font(.system(size: 50, weight: .bold, design: .default))
+                .foregroundColor(.black)
         }
-        .frame(width: UIScreen.main.bounds.width * 0.84)
         .padding()
-        .background(Color("darkBlue"))
         .shadow(radius: 10)
         .cornerRadius(10)
         .onReceive(timer) { _ in

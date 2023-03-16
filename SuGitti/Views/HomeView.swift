@@ -13,25 +13,30 @@ struct HomeView: View {
 
     var body: some View {
         VStack {
-            NavigationStack {
+            NavigationStack{
                 VStack {
                     List(service.shortaces, id: \.self) { element in
-                        if searchText == "" {
-                            // CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
-                            NavigationLink {
-                                DetailsView(mahalleler: element.Mahalleler, title: element.IlceAdi, description: element.Aciklama, dateString: element.KesintiTarihi, giderimleZamani: element.ArizaGiderilmeTarihi)
-                            } label: {
-                                CellView(ilce: element.IlceAdi, mahalleler: element.Mahalleler)
-                            }
-                        } else {
-                            if element.IlceAdi.lowercased().contains(searchText.lowercased()) || element.Mahalleler.lowercased().contains(searchText.lowercased()) {
+                        if element.IlceAdi != "" {
+                            if searchText == "" {
+                                // CellView(ilce: element.IlceAdi, aciklama: element.Aciklama, tarih: element.KayitTarihi)
                                 NavigationLink {
-                                    DetailsView(mahalleler: element.Mahalleler, title: element.IlceAdi, description: element.Aciklama, dateString: element.KesintiTarihi, giderimleZamani: element.ArizaGiderilmeTarihi)
+                                    DetailsView(mahalleler: element.Mahalleler, title: element.IlceAdi, description: element.Aciklama, dateString: element.KesintiTarihi, giderimleZamani: element.ArizaGiderilmeTarihi, ilgiliAciklama: element.KesintiSuresi)
                                 } label: {
                                     CellView(ilce: element.IlceAdi, mahalleler: element.Mahalleler)
                                 }
                             } else {
+                                if element.IlceAdi.lowercased().contains(searchText.lowercased()) || element.Mahalleler.lowercased().contains(searchText.lowercased()) {
+                                    NavigationLink {
+                                        DetailsView(mahalleler: element.Mahalleler, title: element.IlceAdi, description: element.Aciklama, dateString: element.KesintiTarihi, giderimleZamani: element.ArizaGiderilmeTarihi, ilgiliAciklama: element.KesintiSuresi)
+                                    } label: {
+                                        CellView(ilce: element.IlceAdi, mahalleler: element.Mahalleler)
+                                    }
+                                } else {
+                                }
                             }
+                        }else {
+                            Text("AKTIF KESINTI BULUNAMADI!")
+                                .font(.largeTitle)
                         }
                     }
                     .searchable(text: $searchText, prompt: "Look for something")
@@ -59,6 +64,8 @@ struct HomeView: View {
                     )
                 }
             }
+            .accentColor(.black)
+            
         }
     }
 }
@@ -68,3 +75,4 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+

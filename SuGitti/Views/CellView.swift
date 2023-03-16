@@ -30,6 +30,6 @@ struct CellView: View {
 
 struct CellView_Previews: PreviewProvider {
     static var previews: some View {
-        CellView(ilce: "Dikili", mahalleler: "ankara ankara ankara ")
+        CellView(ilce: "Dikili", mahalleler: "ankara ankara ankara ").previewLayout(.sizeThatFits)
     }
 }
