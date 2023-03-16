@@ -11,7 +11,7 @@ import SwiftUI
 struct SuGittiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashScreenView()
         }
     }
 }
